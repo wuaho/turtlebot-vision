@@ -3,12 +3,21 @@ Diario de trabajo para el TFG realizado por Juan Jose Requena Lama
 
 27 de Febrero
 
-
 Los drivers que creo que son los adecuados (http://wiki.ros.org/depth_image_proc)
 drivers para microsoft kinect openni camera (http://wiki.ros.org/openni_camera) y openni_launch (http://wiki.ros.org/openni_launch)
 Para unir opencv con ros (http://wiki.ros.org/vision_opencv)
 
 Desconozco si tengo que instalar drivers y ejecutar archivos .launch para que la kinect publique topics  para la nube de puntos
 
-
 28 de Febrero 
+
+Instalado turtlebot en el portatil, voy a intentar que el portatil simule un turtlebot y desde el servidor se suscriba a
+un topic que publique el servicio simulado de mi portatil.
+Cambiadas las variables del sistema.
+Creado el fichero scriptVariables.sh, la intencion de este script es que te introduzca las variables del sistema que 
+necesitamos para nuestro entorno. 
+Configurado ya pc y portatil para simular al robot tortuga.
+
+Comprobado que, el roscore se ejecuta en el portatil, es decir, en la tortuga, ya que si no fuese asi me habria dejado 
+publicar en un topic sin problema alguno, ejecutando por su cuenta un roscore pero en cambio, me ha aparecido un mensaje 
+de que no podia conectarse con ROS MASTER URI. 
