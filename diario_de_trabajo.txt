@@ -1,0 +1,14 @@
+Diario de trabajo para el TFG realizado por Juan Jose Requena Lama
+
+
+27 de Febrero
+
+
+Los drivers que creo que son los adecuados (http://wiki.ros.org/depth_image_proc)
+drivers para microsoft kinect openni camera (http://wiki.ros.org/openni_camera) y openni_launch (http://wiki.ros.org/openni_launch)
+Para unir opencv con ros (http://wiki.ros.org/vision_opencv)
+
+Desconozco si tengo que instalar drivers y ejecutar archivos .launch para que la kinect publique topics  para la nube de puntos
+
+
+28 de Febrero 

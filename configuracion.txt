@@ -1,0 +1,17 @@
+Cosas de documentacion o cosas que he hecho para el setup de ROS
+
+IDE de desarrollo:
+    Git
+    Github
+    Visual Studio Code + Plugin de ROS
+    Consola Bash
+
+Instalacion del entorno:
+    Instalar distribucion Ubuntu Xenial
+    Instalar los paquetes necesarios para ROS Kinetic
+    Instalar los paquetes necesarios para el turtlebot (http://wiki.ros.org/turtlebot/Tutorials/indigo/Turtlebot%20Installation)
+        Necesarios los pasos dentro de este link? https://answers.ros.org/question/246015/installing-turtlebot-on-ros-kinetic/
+        (No estoy seguro)
+    Cambiar la variable de entorno del sensor 3D por la adecuada para el sensor kinect << export TURTLEBOT_3D_SENSOR=kinect>>
+    Para la visualizacion, hacer uso del archivo de configuracion rviz_config.rviz
+        
