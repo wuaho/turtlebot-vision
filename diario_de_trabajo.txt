@@ -21,3 +21,8 @@ Configurado ya pc y portatil para simular al robot tortuga.
 Comprobado que, el roscore se ejecuta en el portatil, es decir, en la tortuga, ya que si no fuese asi me habria dejado 
 publicar en un topic sin problema alguno, ejecutando por su cuenta un roscore pero en cambio, me ha aparecido un mensaje 
 de que no podia conectarse con ROS MASTER URI. 
+
+1 de Marzo
+
+Ahora en los archivos .bashrc aparecen los exports indicados para conseguir la conectividad entre servidor y robot tortuga.
+Habria que conseguir que dichos export utilizasen los hostname, en vez de las IPs.
