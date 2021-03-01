@@ -26,3 +26,7 @@ de que no podia conectarse con ROS MASTER URI.
 
 Ahora en los archivos .bashrc aparecen los exports indicados para conseguir la conectividad entre servidor y robot tortuga.
 Habria que conseguir que dichos export utilizasen los hostname, en vez de las IPs.
+
+He mirado en la configuracion que quizas si los demas ordenadores no saben resolver el hostname, puede dar problemas segun 
+los ejemplos de esta pagina http://wiki.ros.org/ROS/NetworkSetup . 
+Cambiando las variables $ROS_HOSTNAME por IPs ahora ya no dan problemas.
