@@ -126,6 +126,7 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/servidor/turtlebot-vision/vision_ws/build/gtest/cmake_install.cmake")
+  include("/home/servidor/turtlebot-vision/vision_ws/build/turtlebot_depth_computing/cmake_install.cmake")
 
 endif()
 

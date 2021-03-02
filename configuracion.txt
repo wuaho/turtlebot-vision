@@ -7,14 +7,15 @@ IDE de desarrollo:
     Consola Bash
 
 Instalacion del entorno:
-    Instalar distribucion Ubuntu Xenial
-    Instalar los paquetes necesarios para ROS Kinetic
-    Instalar los paquetes necesarios para el turtlebot (http://wiki.ros.org/turtlebot/Tutorials/indigo/Turtlebot%20Installation)
+    -Instalar distribucion Ubuntu Xenial
+    -Instalar los paquetes necesarios para ROS Kinetic
+    -Instalar los paquetes necesarios para el turtlebot (http://wiki.ros.org/turtlebot/Tutorials/indigo/Turtlebot%20Installation)
         Necesarios los pasos dentro de este link? https://answers.ros.org/question/246015/installing-turtlebot-on-ros-kinetic/
         (No estoy seguro)
     (SCRIPT)
-    Cambiar la variable de entorno del sensor 3D por la adecuada para el sensor kinect << export TURTLEBOT_3D_SENSOR=kinect>>
-    Para la visualizacion, hacer uso del archivo de configuracion rviz_config.rviz
-    Para la conexion entre turtlebot y servidor, seguir los pasos contenidos en este link (http://wiki.ros.org/turtlebot/Tutorials/indigo/Network%20Configuration)
+    -Cambiar la variable de entorno del sensor 3D por la adecuada para el sensor kinect << export TURTLEBOT_3D_SENSOR=kinect>>
+    -Para la visualizacion, hacer uso del archivo de configuracion rviz_config.rviz
+    -Para la conexion entre turtlebot y servidor, seguir los pasos contenidos en este link (http://wiki.ros.org/turtlebot/Tutorials/indigo/Network%20Configuration)
     asi el turtlebot actuara como node master y se haran las conexiones ssh correspondientes.
-
+    -Para que los ordenadores conozcan la resolucion de los hostnames, en los archivos /etc/hosts de cada maquina introduciremos
+    la IP del otro equipo (si estamos en el servidor, introduciremos la de la tortuga y viceversa) junto a su hostname 

@@ -1,0 +1,8 @@
+prefix=/home/servidor/turtlebot-vision/vision_ws/install
+
+Name: turtlebot_depth_computing
+Description: Description of turtlebot_depth_computing
+Version: 0.0.1
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
