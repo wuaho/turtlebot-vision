@@ -47,3 +47,16 @@ Quizas el uso de rostopic hz nos puede hacer ver el momento en el que llega el p
 
 Para la proxima sesion, hacer un script sencillito de python como en el que viene en el libro o aun mas sencillo para probar
 que las dependencias funcionan correctamente. Tras ello, hacer otro donde se utilice la camara y se vea lo que muestra.
+
+3 de Marzo
+
+Cambiada la variable $ROS_MASTER_URI para las pruebas en servidor
+
+rostopic hz TOPIC para saber como de rapido estan llegando los mensajes de un topic. EL resultado pricipal es mensajes 
+por segundo.
+
+http://wiki.ros.org/pcl_ros/Tutorials/CloudToImage te enseña como convertir un pointcloud a una imagen y funciona realmente.
+Pero creo que eso no es eficiente, es decir, entonces para que queremos la pointcloud si la vamos a convertir en una imagen...
+
+Asi que, por una parte tengo que hacer un codigo que se suscriba a la pointcloud y de ahi, descubrir como puedo utilizarla 
+para la computer vision.
