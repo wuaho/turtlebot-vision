@@ -60,3 +60,26 @@ Pero creo que eso no es eficiente, es decir, entonces para que queremos la point
 
 Asi que, por una parte tengo que hacer un codigo que se suscriba a la pointcloud y de ahi, descubrir como puedo utilizarla 
 para la computer vision.
+
+4 de Marzo
+
+Version de OpenCV instalada junto a ROS: 3.3.1
+
+El topic que se publica que nos interesa es el /camera/depth/points , mediante rostopic info TOPIC sabemos que los mensajes
+publicados en ese topic son: sensor_msgs/PointCloud2
+Este tipo de mensaje esta definido en: http://docs.ros.org/en/api/sensor_msgs/html/msg/PointCloud2.html
+Paquete de ros para pcl: http://wiki.ros.org/pcl_ros#Subscribing_to_point_clouds
+Informacion general de pcl en ros: http://wiki.ros.org/pcl/Overview
+
+
+¿Puedo utilizar pcl en python? 
+No, no se puede. Al menos mi version de ROS no posee los modulos adecuados para utilizarlo, los modulos existentes
+son los que aparecen en /opt/ros/kinectic/lib/python2.7/dist-packages/pcl_ros
+
+Correo enviado el profesor sobre si de verdad tengo que utilizar una pcl ya que no se como se utilizaria.
+
+Si utilizase imagenes, se me ocurre que podria utilizarla para reconocer una cara, al reconocerla, el robot se daria la 
+vuelta y retrocedería.
+
+Si quisiese que el robot no se chocase, haria uso del laser scan, asi el robot se moveria automaticamente y si detecta que hay 
+un obstaculo cerca, pues se gira y continua.
