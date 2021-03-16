@@ -83,3 +83,13 @@ vuelta y retrocedería.
 
 Si quisiese que el robot no se chocase, haria uso del laser scan, asi el robot se moveria automaticamente y si detecta que hay 
 un obstaculo cerca, pues se gira y continua.
+
+16 de Marzo
+
+Lo que contiene un mensaje del tipo imagen: https://docs.ros.org/en/melodic/api/sensor_msgs/html/msg/Image.html
+Lo que contiene un header dentro del mensaje imagen http://docs.ros.org/en/api/std_msgs/html/msg/Header.html
+
+Explicacion del use_sim_time https://answers.ros.org/question/288672/how-use_sim_time-works/
+
+Tengo que decidir que rama tomar de las que ha comentado el profesor. Ahora mismo estaba mirando como tomar los timestamps
+publicados en los mensajes de imagen pero el timestamp es diferente al real.
