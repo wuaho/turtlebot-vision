@@ -98,3 +98,16 @@ publicados en los mensajes de imagen pero el timestamp es diferente al real.
 
 Rosbag y rqt_bag parecen bastante interesantes para saber como ha sido el performance de los topics y de sus mensajes. 
 Seguramente necesite saber como utilizarlo.
+
+2 de abril
+
+Tengo que echarle ganas o no voy a conseguir sacar esto. Seguir poco a poco las indicaciones del profesor y hacer algo
+que este mal pero que mas o menos haga su cometido.
+
+El tipo time llamado stampd dentro del header contiene 2 integers. Estos indican los segundos y nanosegundos que han pasado
+desde el epoch. EL epoch es una fecha y hora desde la que se calcula el tiempo en los ordenadores.
+Por ejemplo, el unix epoch es el 1 de enero de 1970 00:00:00 UT. 
+
+El timestamp dentro del paquete de la imagen, indica el tiempo que ha pasado desde que se ha encendido el simulador.
+http://wiki.ros.org/rospy/Overview/Time
+http://wiki.ros.org/Clock
