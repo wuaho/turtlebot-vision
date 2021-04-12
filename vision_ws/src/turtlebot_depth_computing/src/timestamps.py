@@ -5,45 +5,91 @@ import rospy
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 import cv2
+#TODO AÑADIR EL IMPORT DE CSV Y EL DE NUMPY EN EL PAQUETE
+import csv
+import numpy as np
 
-lista= []
+data_list = []
 bridge = CvBridge()
-class Seguidor:
 
+class Seguidor:
+    
     def __init__(self):
+        self.contador = 0
         self.image_sub = rospy.Subscriber('camera/rgb/image_raw/', Image, self.image_callback)
 
     def image_callback(self, msg):
+        
         print("He recibido una imagen!")
         camera_stamp = msg.header.stamp
+        #en un solo float calculado = float(camera_stamp.secs + camera_stamp.nsecs *10**-9)
+        t = rospy.Time.from_sec(rospy.get_time())
+        print(t)
+        img_seq = msg.header.seq
 
         #CALCULO DEL TAMAÑO DE LA IMAGEN
         #TODO MIRAR SI DE VERDAD CAMBIA CUANDO SE MUEVE LA CAMARA 
         n_rows = msg.height 
         row_length = msg.step
-        img_size = n_rows * row_length
-        print(row_length)
-        print(n_rows)
-        print(img_size)    
+        img_size = n_rows * row_length   
+
+        #Para ver si sigue el orden
+        if(self.contador==0):
+            self.contador = img_seq
+        else:
+            self.contador += 1
+        
         
         try:
+            #Mediante bridge, transformamos la imagen de ROS en una que pueda utilizar OpenCV
             cv2_img = bridge.imgmsg_to_cv2(msg,desired_encoding='passthrough')
+
         except CvBridgeError, e:
-            ###CODIGO QUE SE EJECUTA SI SE PRODUCE UN ERROR
+            #Codigo ejecutado al producirse un error
             print(e)
+
         else:
-            system_stamp = rospy.get_rostime()
-            ###CODIGO A EJECUTAR 
-        
-        ###PARA CALCULAR LA DIFERENCIA
-        #sec_dif = system_stamp.secs-camera_stamp.secs
-        #nano_dif = system_stamp.nsecs-camera_stamp.nsecs
-        #print(camera_stamp)
-        #print("La diferencia es de ", sec_dif ,"segundos y de ", nano_dif,"nanosegundos")
-        
-        lista.append((system_stamp.secs,system_stamp.nsecs,camera_stamp.secs,camera_stamp.nsecs))
-        
+            #CODIGO A EJECUTAR DE UN PROGRAMA DE VISION 
+
+            #RGB a HSV y filtro verde 
+            filtrado_verde,mascara_verde = bgr_to_hsv(cv2_img)
             
+        
+        #Calculamos el timestamp actual para saber cuanto tiempo ha pasado
+        system_stamp = rospy.get_rostime()
+        
+        cv2.imshow('filtro',mascara_verde)
+        cv2.imshow('filtrado',filtrado_verde)
+
+        cv2.imshow('original',cv2_img)
+        cv2.waitKey(1)
+
+        #Añadimos a nuestra estructura de datos todos los parametros recogidos
+        data_list.append((str(img_seq), str(self.contador),str(camera_stamp.secs), str(camera_stamp.nsecs), str(system_stamp.secs), str(system_stamp.nsecs), str(img_size)))
+    
+def write_data():
+    #Metodo que escribe los datos recogidos en un fichero csv
+    #FORMATO: Numero de secuencia de la imagen, contador,stamp de la camara (s), en ns, stamp del sistema, en ns, tamaño de la imagen
+
+    with open('datos_recogidos.csv','w') as csvfile:
+        csvfile.write("img_seq,counter,camera_stamp_secs,camera_stamp_nsecs,system_stamp_secs,system_stamp_nsecs,img_size")
+        for stamp in data_list:
+            line = ",".join(stamp)
+            csvfile.write("\n")
+            csvfile.write(line)
+
+def bgr_to_hsv(imagen):
+    # Convert BGR to HSV
+    hsv = cv2.cvtColor(imagen, cv2.COLOR_BGR2HSV)    
+    # define range of green color in HSV
+    lower_green = np.array([36,0,0])
+    upper_green = np.array([86,255,255])     
+    # Threshold the HSV image to get only green colors
+    mask = cv2.inRange(hsv, lower_green, upper_green)
+    # Bitwise-AND mask and original image
+    res = cv2.bitwise_and(imagen,imagen, mask= mask)
+    
+    return res,mask
 
 
 def main():
@@ -52,8 +98,9 @@ def main():
     seguidor=Seguidor()
     #La siguiente linea sirve unicamente para cuando vaya a finalizar el nodo
     rospy.spin()
-    print(lista)
-
+    #Escribimos todos los datos almacenados en el archivo
+    write_data()
+    
 if __name__ == "__main__":
     main()
     

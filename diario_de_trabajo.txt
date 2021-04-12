@@ -111,3 +111,98 @@ Por ejemplo, el unix epoch es el 1 de enero de 1970 00:00:00 UT.
 El timestamp dentro del paquete de la imagen, indica el tiempo que ha pasado desde que se ha encendido el simulador.
 http://wiki.ros.org/rospy/Overview/Time
 http://wiki.ros.org/Clock
+
+5 de abril
+
+Si queremos que el gazebo o simulacion del turtlebot se abra sin interfaz grafica, tendremos que modificar el launch file 
+que se encuentra en /opt/ros/kinetic/share/turtlebot_gazebo/launch .
+
+http://wiki.ros.org/depth_image_proc para procesar las imagenes
+
+6 de abril
+
+12 de abril
+
+CORREO DEL PROFESOR
+
+Algunos detalles:
+1    Pon los cv2.imshow   detrás de la:         system_stamp = rospy.get_rostime()
+2    Entiendo que system_stamp.nsecs  son los ns adicionales al system_stamp.secs . Entonces, ¿En línea 24,25   de tu captura pantalla , se desordenan los frames? 2375.5  s  y luego 2375.1 s  ?
+3    ¿En línea 9,10  de tu captura pantalla , se pierden 5   frames?
+4    Parece q la precisión del timestamp es 5 cs. Compruébalo en alguna web de ROS. Porque además el timestamp en el nodo de llegada es más preciso (no tiene sólo saltos de 0.05 en 0.05, sino de 0.01 en 0.01)
+     De todas formas está bien (podemos medir hasta 200 fps), pero esto tuyo habrá que mejorarlo :” En estas pruebas, al utilizar una simulación y obtener los paquetes desde el mismo ordenador, la diferencia de tiempo es minima.” NO es minima, ya que son alrededor de 0.15 s . Esto es algo grande. P ej a 10 GB/s de acceso a RAM, una foto de 1 Mpixel, 3 MB tarda solo   0.3 ms  = 0.0003 s . Todo el tiempo hasta 0.15 es overhead del ROS evidentemente . Y tb de los cv2.imshow   . Ponlos detrás del timestamp , a ver cuanto dura.
+-    OK a lo de “problemas de escritura en archivos creo que estarían asi resueltos”. Muy buena idea
+5    En cuanto a lo de “una API de medición y quería mostrarle qué tenía en mente” , es darle forma de librería a las funciones que usas, para crear tu propia clase con métodos  para medir tiempo más cómodamente  en cualquier nodo ROS (que contendría llamadas ). Todo lo de
+o    system_stamp = rospy.get_rostime()
+o            data_list.append((str(img_seq), str(camera_stamp.secs), str(camera_stamp.nsecs), str(system_stamp.secs), str(system_stamp.nsecs), str(img_size)))
+o    csvfile.write
+o    etc
+-    que se convierta en algo como: (te versiono otra clase de medir tiempos, aunque  esta  encapsulación podría mejorarse; tampoco soy experto en ing. Sw) . Fíjate en el añadido para  “//por si se hacen varias mediciones y luego se presenta una media aritmética de las mismas y un tiempo minimo”
+
+class ROS_Timer
+{
+    private:
+        double startTime; //it contains the real timer (that was started when PC was switch on
+        double result;    // a partial timing between Start() and Stop()
+        double totalTime;  // the addition of several partial timing (result). It is the total time since timer was created or ResetAll
+        double minimumTime;
+        double overhead;
+        int times;
+        void ReadSeconds (double *Seconds);
+        void PrintSeconds (const char *pc, double *Seconds);
+        void PrintTimeSeconds (const char *pc, double *Seconds);
+        void RestSeconds (double *c_dif, double *c_final, double *c_init);
+        void AddSeconds (double *c_dif, double *c_final, double *c_init);
+    public:
+        ROS_Timer();
+        int  NumberOfMeasures(void); //por si se hacen varias mediciones y luego se presenta una media aritmetica de las mismas y un tiempo minimo
+        void Start();
+        void Stop();
+        void Calibrate();
+        void Reset();
+        void ResetAll();
+        void PrintTime(const char* message);
+        void PrintMeanTime(const char* message);
+        void PrintMinimumTime(const char* message);
+}
+
+A ver que sale cuando ejecutes en dos  PCs  por separado el gazebo y el recolector de frames.
+
+COSAS HECHAS
+
+rosbag me va a servir para grabar simulaciones y pruebas, asi las puedo luego reproducir comodamente en mi casa.
+rostopic hz TOPIC para saber la frecuencia de publicacion de paquetes en un topic.
+he desactivado la gui en el gazebo ya que es innecesaria PERO AHORA LA FRECUENCIA DE PBULICACION DE PAQUETES DE 
+/CAMERA/RGB/image_raw ES MENOR WTFFFFFFFF
+
+1.Hecho
+2.No están desordenados, es que en realidad el de la linea 24 no es 2375.5 s sino 2375.05 s, luego vendría el 2375.1s.
+3. He añadido un contador que se inicia con el numero de secuencia de la primera imagen que le llega al subscriber
+y cada vez que le llega una imagen va aumentando en 1. Así, será más fácil visualizar donde se pierden frames.La diferencia 
+entre el ultimo valor recogido por el contador y el ultimo numero de secuencia de imagen recibido deberia de ser el numero de
+frames perdidos.
+
+El caso es que después de reiniciar varias veces la simulación y probarlo varias veces, no he tenido más problemas de
+pérdidas de frames. Dejaré puesto el contador por si me da  problemas en el futuro. Si tuviese de nuevo problemas,
+podría ser por la ausencia de configuracion del queue_size en el subscriber cuando llamo a rospy.Subscriber en el script.
+
+4. Para comprobar si realmente los frames se estaban tomando cada 0.05s he utilizado el comando
+ <<rostopic hz /camera/rgb/image_raw>>. INSERTAR CAPTURA 
+ Como se puede ver en la imagen, la frecuencia de publicacion de imagenes en el topic ronda entre los 38~42 hz.
+ Además, lo interesante es que índica que la publicación más "rápida" ha sido cada 0.010s y la más "lenta" cada 0.050s
+ en vez de siempre cada 0.050s como se podría llegar a intuir por la traza del .csv. 
+Al realizar una simulación más larga, he podido comprobar que esa diferencia de 0.010s entre toma de imágenes se puede observar
+también. INSERTAR CAPTURA 2.
+Además, también se puede observar dos imágenes tomadas justo en el mismo instante, he buscado por qué puede ser pero sin éxito.
+Quizás se deba a alguna sincronización necesaria.
+
+Ahora bien, en cuanto a la precisión de los timestamps, cierto es que solo llegan hasta las centésimas de segundo.
+Pero creo que esto es por la configuración del archivo .world utilizado en la simulación de gazebo. Aunque he estado
+leyendo un poco y no sé si es tan fácil toquetear esos parametros ya que la simulación podría ir más rápida o más lenta
+que la realidad dependiendo de nuestra capacidad de computación.
+
+EL ARCHIVO .WORLD ESTA EN /opt/ros/kinetic/share/turtlebot_gazebo/worlds/playground.world
+PROBAR A CAMBIAR EL PARAMETRO DE REAL TIME UPDATE RATE
+PROBAR TAMBIEN DESACTIVANDO EL SIM TIME AUNQUE NO PARECE QUE FUNCIONE
+https://answers.ros.org/question/35699/gazebo-real-and-simulation-time/
+http://gazebosim.org/tutorials?tut=physics_params&cat=physics
