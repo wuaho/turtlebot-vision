@@ -187,19 +187,55 @@ pérdidas de frames. Dejaré puesto el contador por si me da  problemas en el fu
 podría ser por la ausencia de configuracion del queue_size en el subscriber cuando llamo a rospy.Subscriber en el script.
 
 4. Para comprobar si realmente los frames se estaban tomando cada 0.05s he utilizado el comando
- <<rostopic hz /camera/rgb/image_raw>>. INSERTAR CAPTURA 
+ <<rostopic hz /camera/rgb/image_raw>> para ver cuantos paquetes por segundo publica el topic al que se suscribe mi nodo.
+  INSERTAR CAPTURA 
  Como se puede ver en la imagen, la frecuencia de publicacion de imagenes en el topic ronda entre los 38~42 hz.
  Además, lo interesante es que índica que la publicación más "rápida" ha sido cada 0.010s y la más "lenta" cada 0.050s
  en vez de siempre cada 0.050s como se podría llegar a intuir por la traza del .csv. 
 Al realizar una simulación más larga, he podido comprobar que esa diferencia de 0.010s entre toma de imágenes se puede observar
 también. INSERTAR CAPTURA 2.
 Además, también se puede observar dos imágenes tomadas justo en el mismo instante, he buscado por qué puede ser pero sin éxito.
-Quizás se deba a alguna sincronización necesaria.
+Quizás se deba a alguna sincronización necesaria que se realiza.
 
 Ahora bien, en cuanto a la precisión de los timestamps, cierto es que solo llegan hasta las centésimas de segundo.
-Pero creo que esto es por la configuración del archivo .world utilizado en la simulación de gazebo. Aunque he estado
-leyendo un poco y no sé si es tan fácil toquetear esos parametros ya que la simulación podría ir más rápida o más lenta
-que la realidad dependiendo de nuestra capacidad de computación.
+Creo que esto es por la configuración del archivo .world utilizado en la simulación de gazebo. Si la simulación de gazebo es 
+actualizada cada 0.01s, no podrá dar un timestamp más preciso que ese.
+INSERTAR CAPTURA 3
+El archivo .world que utiliza <<roslaunch turtlebot_gazebo turtlebot_world.launch>> se encuentra en 
+/opt/ros/kinetic/share/turtlebot_gazebo/worlds/playground.world
+INSERTAR IMAGEN 4
+(http://gazebosim.org/tutorials?tut=physics_params&cat=physics) Aquí se explica el significado de los diferentes parámetros de la 
+simulación que nos interesa como puede ser max_step_size que por defecto en el archivo está en 0.01s de ahí a que 
+el tiempo en nuestra simulación solo llegue hasta las centésimas de segundo.
+Tras cambiar max_step_size a 0.001 y real_time_update_rate a 1000 (necesario tambien) consigo que los tiempos en la simulación
+lleguen hasta las milésimas de segundo.INSERTAR IMAGEN 5
+Pero tambien he podido comprobar que tras haber cambiado esos parámetros, la frecuencia de publicacion de imagenes 
+en el topic /camera/rgb/image_raw es mucho menor, llegando unicamente a 20 hz. INSERTAR IMAGEN 6
+
+
+Supongo que todos estos son problemas que quizás solo me voy a encontrar haciendo uso de simulaciones, pero desconozco si 20 hz
+que supongo que resultará en 20fps es calidad suficiente (me comentaste en un correo que 15 fps es calidad suficiente para 
+casi todo). Luego, en cuanto a la precisión de los timestamps, supongo que esto es una pequeña mejora pero no sé si es lo 
+suficientemente competente. ¿ Lo cambio entonces para que sea más preciso aunque resulte en una pérdida de frames por segundo ?
+
+5.Es cierto, envié el correo sin pensar mucho en los números. He realizado la simulación de nuevo y he podido comprobar que
+estos altos valores se producen solo al principio de ejecutar mi nodo, como en las primeras 20 entradas. Tras ello, obtengo
+una diferencia de 0.00, 0.01 o 0.02s entre el momento en el que se captura la imagen y el momento cuando tomo el timestamp
+tras el filtro. 
+INSERTAR CAPTURA PARTE 5
+
+He realizado esta simulación mientras movía la camará del robot mediante gazebo para evitar que siempre se 
+estuviese mandando el mismo frame, la he mantenido durante 2 minutos.
+Teniendo la simulación actualizandose cada 1cs, obtengo una media de 0.01042s, es decir,
+10.42ms entre la toma de imagen y la toma del timestamp tras el filtro.  
+
+Si cambio el parametro del archivo .world a max_step_size =0.001 para tener actualización de la simulación cada 1ms, 
+obtengo  aproximadamente unos 0.00910s de diferencia de media, es decir, 9.1ms entre la toma de imagen y la toma
+del timestamp tras el filtro.  
+
+¿Cómo son estos números? ¿Son demasiado grandes aún al tratarse de una simulación que se está utilizando en el mismo ordenador
+en el que se capturan los frames?
+
 
 EL ARCHIVO .WORLD ESTA EN /opt/ros/kinetic/share/turtlebot_gazebo/worlds/playground.world
 PROBAR A CAMBIAR EL PARAMETRO DE REAL TIME UPDATE RATE

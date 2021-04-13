@@ -16,6 +16,7 @@ bridge = CvBridge()
 class Seguidor:
     
     def __init__(self):
+        self.media = 0
         self.contador = 0
         self.image_sub = rospy.Subscriber('camera/rgb/image_raw/', Image, self.image_callback)
 
@@ -24,7 +25,7 @@ class Seguidor:
         print("He recibido una imagen!")
         camera_stamp = msg.header.stamp
         #en un solo float 
-        #camera_stamp_float = float(camera_stamp.secs + camera_stamp.nsecs *10**-9)
+        camera_stamp_float = float(camera_stamp.secs + camera_stamp.nsecs *10**-9)
         
         img_seq = msg.header.seq
 
@@ -34,11 +35,7 @@ class Seguidor:
         row_length = msg.step
         img_size = n_rows * row_length   
 
-        #Para ver si sigue el orden
-        if(self.contador==0):
-            self.contador = img_seq
-        else:
-            self.contador += 1
+        
         
         
         try:
@@ -58,7 +55,7 @@ class Seguidor:
         
         #Calculamos el timestamp actual para saber cuanto tiempo ha pasado
         system_stamp = rospy.get_rostime()
-        #system_stamp_float = rospy.get_time()
+        system_stamp_float = rospy.get_time()
 
         cv2.imshow('filtro',mascara_verde)
         cv2.imshow('filtrado',filtrado_verde)
@@ -66,10 +63,19 @@ class Seguidor:
         cv2.imshow('original',cv2_img)
         cv2.waitKey(1)
 
+        #Para ver si sigue el orden
+        if(self.contador==0):
+            diferencia = 0
+            self.contador = img_seq
+        else:
+            diferencia = system_stamp_float - camera_stamp_float 
+            self.contador += 1
+
         
+        self.media += diferencia
         #Añadimos a nuestra estructura de datos todos los parametros recogidos
         data_list.append((str(img_seq), str(self.contador),str(camera_stamp.secs), str(camera_stamp.nsecs), 
-        str(system_stamp.secs), str(system_stamp.nsecs), str(img_size)))
+        str(system_stamp.secs), str(system_stamp.nsecs), str(img_size), str(diferencia),str(self.media)))
     
 def write_data():
     #Metodo que escribe los datos recogidos en un fichero csv
