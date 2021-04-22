@@ -242,3 +242,42 @@ PROBAR A CAMBIAR EL PARAMETRO DE REAL TIME UPDATE RATE
 PROBAR TAMBIEN DESACTIVANDO EL SIM TIME AUNQUE NO PARECE QUE FUNCIONE
 https://answers.ros.org/question/35699/gazebo-real-and-simulation-time/
 http://gazebosim.org/tutorials?tut=physics_params&cat=physics
+
+14 de abril
+
+19 de abril
+
+<< rostopic bw /camera/rgb/image_raw >> para saber el ancho de banda consumido por un topic
+
+Para cambiar la frecuencia de publicacion de imagenes en la simulacion, hay que ir al archivo: 
+/opt/ros/kinect/share/turtlebot_description.urdf.xacro
+
+
+Segun la documentacion, hay que asignarle un update rate acorde a lo que indique el fabricante del sensor.
+
+Configuracion por defecto: http://gazebosim.org/tutorials?tut=ros_gzplugins#OpenniKinect
+
+Update rate
+Number of times per second a new camera image is taken within Gazebo. This is the maximum update rate the sensor 
+will attempt during simulation but it could fall behind this target rate if the physics simulation runs faster than 
+the sensor generation can keep up.
+
+original en realidad: 20 , 10
+Drivers de la camara: https://wiki.ros.org/openni_camera
+Guia de parametros: http://gazebosim.org/tutorials/?tut=ros_depth_camera
+The updateRate parameter should be set to 0, which will cause the plugin to publish depth information as the same rate as 
+the parent SDF sensor. If updateRate is not 0, it will do additional throttling on top of the parent sensor's update rate.
+
+Kinect 1 puede publicar a 5, 15 o 30 fps
+
+22 de abril
+
+Terminado de escribir las hojas que habia empezado sobre datos. Probando conectividad entre servidor y portatil ya que 
+es muy mala.
+
+Añadida la variables ROS_IP en el .bashrc para evitar que se formen problemas.
+
+Instalado chrony  y seguidos los pasos del tutorial dentro de http://wiki.ros.org/ROS/NetworkSetup 
+para una correcta configuracion de la red. Hay un paso final de chrony que me he saltado porque creo que no hace falta.
+
+<< rosparam set enable_statistics true >> interesante si luego quieres mediante rqt_graph ver las estadisticas 
