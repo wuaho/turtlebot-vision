@@ -18,3 +18,8 @@ echo export ROS_MASTER_URI=http://localhost:11311 >> ~/.bashrc
 
 echo export ROS_HOSTNAME=HOSTNAME_DE_ESTA_MAQUINA >> ~/.bashrc
 
+
+#Para poder hacer un roslaunch desde el servidor en el cliente mediante ssh tenemos que añadir en el .bashrc del cliente
+#el comando << export DISPLAY=:0  >>
+echo export DISPLAY=:0 
+

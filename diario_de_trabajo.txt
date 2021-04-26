@@ -280,4 +280,12 @@ Añadida la variables ROS_IP en el .bashrc para evitar que se formen problemas.
 Instalado chrony  y seguidos los pasos del tutorial dentro de http://wiki.ros.org/ROS/NetworkSetup 
 para una correcta configuracion de la red. Hay un paso final de chrony que me he saltado porque creo que no hace falta.
 
-<< rosparam set enable_statistics true >> interesante si luego quieres mediante rqt_graph ver las estadisticas 
+<< rosparam set enable_statistics true >> interesante si luego quieres mediante rqt_graph ver las estadisticas  
+aunque para mi nodo no sale nada
+
+nada, no hay manera de conseguir que la latencia no sea 300ms 
+
+26 de abril
+
+Añadido la variable a .bashrc de DISPLAY=:0 para poder hacer un roslaucnh desde el servidor en el portatil robot y asi no 
+tener que movernos hasta el portatil cada vez que queramos hace run roslaunch

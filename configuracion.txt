@@ -19,6 +19,8 @@ Instalacion del entorno:
     asi el turtlebot actuara como node master y se haran las conexiones ssh correspondientes.
     -Para que los ordenadores conozcan la resolucion de los hostnames, en los archivos /etc/hosts de cada maquina introduciremos
     la IP del otro equipo (si estamos en el servidor, introduciremos la de la tortuga y viceversa) junto a su hostname 
+    -Para poder hacer un roslaunch desde el servidor en el cliente mediante ssh tenemos que añadir en el .bashrc del cliente
+    el comando << export DISPLAY=:0  >>
 
 Desarrollo del paquete:
     -Ahora CMAkeLists.txt tiene un findPAckage(OpenCV)
