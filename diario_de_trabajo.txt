@@ -287,5 +287,25 @@ nada, no hay manera de conseguir que la latencia no sea 300ms
 
 26 de abril
 
-Añadido la variable a .bashrc de DISPLAY=:0 para poder hacer un roslaucnh desde el servidor en el portatil robot y asi no 
+Añadido la variable a .bashrc de DISPLAY=:0 para poder hacer un roslaunch desde el servidor en el portatil robot y asi no 
 tener que movernos hasta el portatil cada vez que queramos hace run roslaunch
+
+Si miro la performance de /camera/rgb/image_raw/compressed se pueden observar muy buenos resultados. Obteniendo la misma hz
+que si fuese en local y un delay mucho menor que el conseguido mediante el topic sin comprimir. 
+
+Usar UDP no es factible porque udp no aporta numero de secuencia de paquetes y por lo tanto no lo tendriamos en los mensajes.
+Ademas de que creo que en rospy aun no esta implementado.
+
+Mirar si de verdad estoy calculando bien el ms, informarme del uso del topic clock y del use_sim_time. 
+A ver, en principio no deberia de tener problemas de que al pillar los timestamps me vayan a dar un retraso desde la 
+peticion hasta que me lo devuelve. Teniendo en cuenta la sincronizacion de reloj que deben de tener las maquinas.
+Ademas de que si trabajo con la simulacion, no voy a conseguir que me devuelva el timestamp real dispositivos como 
+la camara y tal del robot.
+
+La proxima vez tengo que mirar los papers que tengo en google drive y ver que herramientas existen para ver la performance
+de los topcis y los nodos. A partir de esas herramientas basarme en la creacion de las mias.
+Ademas, debo de aprender a utilizar las imagenes comprimidas.
+
+28 de abril
+
+Instalado rqt. rqt es una herramienta muy potente que contiene muchos plugins utiles.

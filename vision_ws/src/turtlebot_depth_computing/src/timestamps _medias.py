@@ -18,7 +18,7 @@ class Seguidor:
     def __init__(self):
         self.media = 0
         self.contador = 0
-        self.image_sub = rospy.Subscriber('camera/rgb/image_raw/', Image, self.image_callback)
+        self.image_sub = rospy.Subscriber('camera/rgb/image_raw', Image, self.image_callback)
 
     def image_callback(self, msg):
         
