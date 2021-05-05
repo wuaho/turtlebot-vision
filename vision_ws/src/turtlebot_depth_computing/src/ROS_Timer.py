@@ -20,12 +20,15 @@ class ROS_Timer:
         self.frameSeqNumber = None
         self.expectedFrameSeqNumber = None
         
+        
         self.cameraStamp = None
         self.receiptStamp = None
         self.postProcessingStamp = None
 
+        
         self.lostPackets = 0
         self.totalLostPackets = 0
+        self.sumImageSize = float(0)
         self.networkDelay = float(0)
         self.totalNetworkDelay = float(0)
         self.maxTime = float('-inf')
@@ -79,11 +82,16 @@ class ROS_Timer:
         """Sets the sequence number for the frame took by the camera """
         self.frameSeqNumber = numberOfFrame
     
+    def set_imageSize(self,array_size_in_bytes):
+        """Sets the size of the image contained in the packet"""
+        self.sumImageSize += float(array_size_in_bytes)
+    
     def set_containedMessageInfo(self,msg):
         """Calls the functions set_cameraStamp and set_frameSeqNumber which save important information about when
         was the image taken by the camera and the sequence number of the frame"""
         self.set_cameraStamp(msg.header.stamp)
         self.set_frameSeqNumber(msg.header.seq)
+        self.set_imageSize(len(msg.data))
 
     def get_totalReceivedImages(self):
         return self.imageCounter
@@ -130,6 +138,15 @@ class ROS_Timer:
         jitter = diff / ( len(self.storedData) -1)
 
         return jitter
+    
+    def calculate_bw(self):
+        """Returns the average bandwidth consumption in MB/s"""
+        sum_of_bytes = self.sumImageSize
+        average_bytes_per_image = sum_of_bytes / self.get_totalReceivedImages()
+        FPS = self.calculate_fps()
+        bw = ((average_bytes_per_image / 1024) / 1024) * FPS  
+        return bw
+
        
     def start(self):
         """Starts the timer"""
@@ -178,9 +195,9 @@ class ROS_Timer:
             txtfile.write("MEAN LATENCY ACHIEVED: "+ str(self.get_meanTime())+" s\n")
             txtfile.write("MAX LATENCY ACHIEVED: "+ str(self.get_maxTime())+" s\n")
             txtfile.write("MIN LATENCY ACHIEVED: "+ str(self.get_minTime())+" s\n")
-            txtfile.write("MEAN JITTER: "+ str(self.calculate_jitter())+" s\n")
-            txtfile.write("APROX FREQUENCY: "+ str(self.calculate_fps())+" FPS")
-            
+            txtfile.write("AVERAGE JITTER: "+ str(self.calculate_jitter())+" s\n")
+            txtfile.write("APROX FREQUENCY: "+ str(self.calculate_fps())+" FPS\n")
+            txtfile.write("AVERAGE BANDWIDTH CONSUMPTION: " + str(self.calculate_bw()) +" MB/s")
 
 
 

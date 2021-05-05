@@ -315,9 +315,21 @@ Instalado rqt. rqt es una herramienta muy potente que contiene muchos plugins ut
 5 de mayo
 
 Cuestiones a responder:
-Implementar ancho de banda consumido
 Implementar calculo del jitter  DONETE
+
+Implementar ancho de banda consumido
 Mirar % de compresion en topic compressed - si es alto, hacer un topic custom con bajada de resolucion de imagen
+    Imagenes comprimidas: http://docs.ros.org/en/api/sensor_msgs/html/msg/CompressedImage.html
+
+    Sobre esto, cuando las imagenes estan en RAW se utiliza el encoding BGR8 y las imagenes son de width: 620 x height:480
+    Ahora bien, el topic compressed manda imagenes comprimidas de BGR8 a JPEG.
+
+    http://wiki.ros.org/compressed_image_transport#ROS_API API SOBRE LAS IMAGENES COMPRIMIDAS POR OPENNI
+    Por defecto jpeg quality al 80% que quiere decir que va a intentar que sea una buena calidad de imagen
+
+
+
+
 Mirar los recursos consumidos por el portatil, bajar los FPS a lso que publica DONE
     Por defecto, arriba 20 abajo 10, por defecto publica a unos 24-25 fps
     Si pongo el update rate a 0.0 de abajo para que suba imagenes en cuanto pueda, y obtengo un hz de 26-27 fps. Esto se debe
@@ -334,11 +346,14 @@ Mirar los recursos consumidos por el portatil, bajar los FPS a lso que publica D
     En cuanto a el consumo de recursos del ordenador, no podemos confirmar que se trate de un problema de falta de capacidad
     de computacion por parte de la grafica ya que la grafica que posee, una nvidia 920m no soporta monitorizacion de los procesos
     ni consumo de ellos. Dado que la parte de renderizado de imagenes por parte del simulador es realizado por la grafica,
-    no podemos conseguir resultados concluyentes.
-
+    no podemos conseguir resultados concluyentes. En realidad si podemos por la memoria consumida en la grafica.
 
     
 Uso de UDP -> creacion del nodo en C++ 
                 dado que no esta soportado el uso de udp en nodos creados con python, descartamos esta opcion
+
+
+
+Para poner a funcionar la camara del turtlebot quizas tengo que hacer << roslaunch openni_launch openni_launch> o asi
 
 
