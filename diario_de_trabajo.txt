@@ -250,7 +250,7 @@ http://gazebosim.org/tutorials?tut=physics_params&cat=physics
 << rostopic bw /camera/rgb/image_raw >> para saber el ancho de banda consumido por un topic
 
 Para cambiar la frecuencia de publicacion de imagenes en la simulacion, hay que ir al archivo: 
-/opt/ros/kinect/share/turtlebot_description.urdf.xacro
+/opt/ros/kinect/share/turtlebot_description/urdf/turtlebot_gazebo.urdf.xacro
 
 
 Segun la documentacion, hay que asignarle un update rate acorde a lo que indique el fabricante del sensor.
@@ -309,3 +309,36 @@ Ademas, debo de aprender a utilizar las imagenes comprimidas.
 28 de abril
 
 Instalado rqt. rqt es una herramienta muy potente que contiene muchos plugins utiles.
+
+4 de mayo
+
+5 de mayo
+
+Cuestiones a responder:
+Implementar ancho de banda consumido
+Implementar calculo del jitter  DONETE
+Mirar % de compresion en topic compressed - si es alto, hacer un topic custom con bajada de resolucion de imagen
+Mirar los recursos consumidos por el portatil, bajar los FPS a lso que publica DONE
+    Por defecto, arriba 20 abajo 10, por defecto publica a unos 24-25 fps
+    Si pongo el update rate a 0.0 de abajo para que suba imagenes en cuanto pueda, y obtengo un hz de 26-27 fps. Esto se debe
+    seguramente a uin bottleneck de la gpu que no de para mas.
+    Si pongo el update rate de ambos a 0 se publica a unos 100hz pero luego se pierden paquetes
+    Si pongo 30 arriba y 0 abajo consigo unos 40 hz
+    Si pongo 0 arriba y 30 abajo consigo unos 97 hz
+    Si pongo 5.0 arriba y 0 abajo me publica a unos 7hz
+
+    Solo tocar el update rate del sensor, el del plugin hara throttling, osea, podria bajar el update rate pero nunca subirlo.
+    Igualmente no me ha funcionado a mi.
+
+    Bajando los FPS a los que publica conseguimos que no haya perdidas de paquetes utilizando las imagenes raw.
+    En cuanto a el consumo de recursos del ordenador, no podemos confirmar que se trate de un problema de falta de capacidad
+    de computacion por parte de la grafica ya que la grafica que posee, una nvidia 920m no soporta monitorizacion de los procesos
+    ni consumo de ellos. Dado que la parte de renderizado de imagenes por parte del simulador es realizado por la grafica,
+    no podemos conseguir resultados concluyentes.
+
+
+    
+Uso de UDP -> creacion del nodo en C++ 
+                dado que no esta soportado el uso de udp en nodos creados con python, descartamos esta opcion
+
+

@@ -26,10 +26,11 @@ class ROS_Timer:
 
         self.lostPackets = 0
         self.totalLostPackets = 0
-        self.networkDelay = None
-        self.totalNetworkDelay = 0
+        self.networkDelay = float(0)
+        self.totalNetworkDelay = float(0)
         self.maxTime = float('-inf')
         self.minTime = float('inf')
+    
         
         ###DATA STRUCTURE: LIST OF TUPLES. Each tuple: (frameSeqNumber,cameraStamp,receiptStamp,postProcessingStamp,
         # lostPackets, network delay,processing delay,total delay)
@@ -47,18 +48,17 @@ class ROS_Timer:
         self.expectedFrameSeqNumber = self.frameSeqNumber + 1
         
     def __calculateDelays(self):
-
-        self.networkDelay = self.receiptStamp -self.cameraStamp
+        self.networkDelay = float(self.receiptStamp -self.cameraStamp)
         self.totalNetworkDelay += self.networkDelay
 
         if(self.networkDelay > self.maxTime):
             self.maxTime = self.networkDelay
 
-        if(self.networkDelay <self.minTime):
+        if(self.networkDelay < self.minTime and self.networkDelay >0):
             self.minTime = self.networkDelay
 
-        processingDelay = self.postProcessingStamp - self.receiptStamp
-        totalDelay = self.receiptStamp - self.cameraStamp
+        processingDelay = float(self.postProcessingStamp - self.receiptStamp)
+        totalDelay = float(self.postProcessingStamp - self.cameraStamp)
 
         return processingDelay,totalDelay
 
@@ -78,6 +78,12 @@ class ROS_Timer:
     def set_frameSeqNumber(self,numberOfFrame):
         """Sets the sequence number for the frame took by the camera """
         self.frameSeqNumber = numberOfFrame
+    
+    def set_containedMessageInfo(self,msg):
+        """Calls the functions set_cameraStamp and set_frameSeqNumber which save important information about when
+        was the image taken by the camera and the sequence number of the frame"""
+        self.set_cameraStamp(msg.header.stamp)
+        self.set_frameSeqNumber(msg.header.seq)
 
     def get_totalReceivedImages(self):
         return self.imageCounter
@@ -111,12 +117,26 @@ class ROS_Timer:
         return self.receiptStamp
     
     def calculate_fps(self):
+        """Returns the fps that has been achieved after stopping the timer"""
         fps = self.get_totalReceivedImages() / self.get_runtime()
         return fps
+    def calculate_jitter(self):
+        """Returns the jitter that has been achieved after stopping the timer. That is the mean difference of delay
+         between consecutive packets"""
+        diff = float(0)
+        for i in range(len(self.storedData)-1):
+            diff += abs(self.storedData[i][5] - self.storedData[i+1][5])
+
+        jitter = diff / ( len(self.storedData) -1)
+
+        return jitter
+       
     def start(self):
+        """Starts the timer"""
         self.startTime = time.time()
     
     def stop(self):
+        """Stops the timer"""
         self.stopTime = time.time()
     
     
@@ -148,6 +168,8 @@ class ROS_Timer:
                 csvfile.write(line)
 
     def write_usefulInfo(self):
+        """Writes a file in the same directory named 'useful_info.txt' that contains some performance 
+        information about the simulation"""
         with open('useful_info.txt','w') as txtfile:
             txtfile.write("TOTAL TIME SPENT ON SIMULATION: "+str(self.get_runtime())+" s\n")
             txtfile.write("TOTAL NUMBER OF IMAGES RECEIVED: "+str(self.get_totalReceivedImages())+" images\n")
@@ -156,10 +178,12 @@ class ROS_Timer:
             txtfile.write("MEAN LATENCY ACHIEVED: "+ str(self.get_meanTime())+" s\n")
             txtfile.write("MAX LATENCY ACHIEVED: "+ str(self.get_maxTime())+" s\n")
             txtfile.write("MIN LATENCY ACHIEVED: "+ str(self.get_minTime())+" s\n")
+            txtfile.write("MEAN JITTER: "+ str(self.calculate_jitter())+" s\n")
             txtfile.write("APROX FREQUENCY: "+ str(self.calculate_fps())+" FPS")
-
+            
 
 
 
 if __name__ == "__main__":
     print("Start")
+    

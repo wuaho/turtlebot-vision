@@ -5,7 +5,6 @@ import rospy
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 import cv2
-#TODO AÑADIR EL IMPORT DE CSV Y EL DE NUMPY EN EL PAQUETE
 import csv
 import numpy as np
 from ROS_Timer import ROS_Timer
@@ -43,12 +42,10 @@ class Camera_Frames_Analysis:
         cv2.imshow('filtered',filtered_with_green)
         cv2.imshow('original',cv2_img)
         cv2.waitKey(1)
-
+        
         #Getting the timestamp stored in the message sent by the camera and make ros_timer handle it
-        ros_timer.set_cameraStamp(msg.header.stamp)
-
-        #Getting the number sequence inside the image taken by the camera
-        ros_timer.set_frameSeqNumber(msg.header.seq)
+        # and also getting the number sequence inside the image taken by the camera
+        ros_timer.set_containedMessageInfo(msg)
 
         #We add the information we gathered to the data container
         ros_timer.add_frame_to_data()
