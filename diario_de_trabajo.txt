@@ -356,4 +356,40 @@ Uso de UDP -> creacion del nodo en C++
 
 Para poner a funcionar la camara del turtlebot quizas tengo que hacer << roslaunch openni_launch openni_launch> o asi
 
+10 de mayo
 
+Como funciona compresion a jpeg
+http://wiki.ros.org/image_transport
+http://wiki.ros.org/compressed_image_transport
+http://wiki.ros.org/theora_image_transport
+
+http://wiki.ros.org/image_transport/Tutorials
+
+http://wiki.ros.org/image_transport/Tutorials/ExaminingImagePublisherSubscriber Para cambiar los settings de la publicacion de
+imagenes
+
+<<rosrun rqt_reconfigure rqt_reconfigure>> para cambiar facilmente los parametros de publicacion
+
+sin compresion: ancho de banda consumido por las imagenes =  7.42957414662 MB/s
+                            MEAN LATENCY ACHIEVED: 0.273617021277 s
+                            tamaño de imagen medio = 0.8828125 MB
+
+cuando jpeg quality a 80 : ancho de banda consumido por las imagenes = 0.2608960522 MB/s
+                            MEAN LATENCY ACHIEVED: 0.0214285714284 s
+                            tamaño de imagen medio = 0.014205806331547428 MB
+
+cuando jpeg quality a 100 : ancho de banda consumido por las imagenes = 0.869338846287 MB/s
+                            MEAN LATENCY ACHIEVED: 0.0175221238939 s
+                            tamaño de imagen medio = 0.05570984287422244 MB
+
+cuando jpeg quality a 1: ancho de banda consumido por las imagenes = 0.130256796755 MB/s
+                            MEAN LATENCY ACHIEVED: 0.0192342342342 s
+                            tamaño de imagen medio = 0.005820772669336817 MB                           
+                            
+cuando es en png con level a 9 : ancho de banda consumido por las imagenes = 0.415781072328 MB/s 
+                                MEAN LATENCY ACHIEVED: 0.165714285714 s 
+                                tamaño de imagen medio = 0.0192342342342 MB
+
+cuando es en png con level a 1 : AVERAGE BANDWIDTH CONSUMPTION: 1.42216126601 MB/s
+                                MEAN LATENCY ACHIEVED: 0.0321973094169 s
+                                tamaño de imagen medio = 0.103034324333316 MB

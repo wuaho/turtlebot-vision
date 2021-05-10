@@ -146,6 +146,12 @@ class ROS_Timer:
         FPS = self.calculate_fps()
         bw = ((average_bytes_per_image / 1024) / 1024) * FPS  
         return bw
+    
+    def print_average_bytes_per_image(self):
+        ###BORRAR MAS ADELANTE, ES SOLO UN METODO AUXILIAR
+        sum_of_bytes = self.sumImageSize
+        average_MB_bytes_per_image = sum_of_bytes / self.get_totalReceivedImages() /1024/1024
+        print(average_MB_bytes_per_image,"MB")
 
        
     def start(self):

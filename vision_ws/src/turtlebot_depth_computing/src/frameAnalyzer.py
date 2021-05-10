@@ -48,6 +48,9 @@ class Camera_Frames_Analysis:
 
         #We add the information we gathered to the data container
         ros_timer.add_frame_to_data()
+        
+        #Uncomment this line if you want to print the average size of the images taken
+        #ros_timer.print_average_bytes_per_image()
     
 
 
