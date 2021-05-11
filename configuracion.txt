@@ -25,3 +25,4 @@ Instalacion del entorno:
 Desarrollo del paquete:
     -Ahora CMAkeLists.txt tiene un findPAckage(OpenCV)
     -Añadidas las dependencias en package.xml con opencv y cv_bridge
+    -Recordar hacer un chmod +x filename para que se pueda ejecutar dicho script
