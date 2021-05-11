@@ -26,13 +26,13 @@ class image_converter:
             cv2.circle(cv_image, (50,50), 10, 255)
         
         try:
-            self.image_pub.publish(self.bridge.cv2_to_imgmsg(cv_image,"bgr8"))
+            self.image_pub.publish(self.bridge.cv2_to_imgmsg(cv_image,"bgr8",queue_size=10))
         except CvBridgeError as e:
             print(e)
 
 def main(args):
-    ic = image_converter()
     rospy.init_node("image_converter")
+    ic = image_converter()
     try:
         rospy.spin()
 
