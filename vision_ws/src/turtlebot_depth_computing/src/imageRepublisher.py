@@ -30,14 +30,14 @@ class image_converter:
         except CvBridgeError as e:
             print(e)
 
-    def main(args):
-        ic = image_converter()
-        rospy.init_node("image_converter")
-        try:
-            rospy.spin()
+def main(args):
+    ic = image_converter()
+    rospy.init_node("image_converter")
+    try:
+        rospy.spin()
 
-        except KeyboardInterrupt:
-            print("Shutting down")
+    except KeyboardInterrupt:
+        print("Shutting down")
         
-    if __name__ == '__main__':
-        main(sys.argv)
+if __name__ == '__main__':
+    main(sys.argv)
