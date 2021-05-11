@@ -21,6 +21,8 @@ Instalacion del entorno:
     la IP del otro equipo (si estamos en el servidor, introduciremos la de la tortuga y viceversa) junto a su hostname 
     -Para poder hacer un roslaunch desde el servidor en el cliente mediante ssh tenemos que añadir en el .bashrc del cliente
     el comando << export DISPLAY=:0  >>
+    -Quitadas las carpetas build y devel del repositorio git para que asi no haya problemas al clonar repositorios en otra 
+    maquina. Eso si, ahora tendremos que hacer un catkin_make tras clonar
 
 Desarrollo del paquete:
     -Ahora CMAkeLists.txt tiene un findPAckage(OpenCV)
