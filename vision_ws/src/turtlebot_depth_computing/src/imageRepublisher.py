@@ -21,13 +21,13 @@ class image_converter:
         except CvBridgeError as e:
             print(e)
 
-        cv_image = cv_image.resize(img, (0,0), fx = 0.5, fy = 0.5)
+        cv_modified = cv2.resize(cv_image, (0,0), fx = 0.5, fy = 0.5)
         # (rows,cols,channels) = cv_image.shape
         # if(cols > 60 and rows > 60) :
         #     cv2.circle(cv_image, (50,50), 10, 255)
         
         try:
-            self.image_pub.publish(self.bridge.cv2_to_imgmsg(cv_image,"bgr8"))
+            self.image_pub.publish(self.bridge.cv2_to_imgmsg(cv_modified,"bgr8"))
         except CvBridgeError as e:
             print(e)
 
