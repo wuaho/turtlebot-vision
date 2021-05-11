@@ -2,3 +2,4 @@
 useful_info.txt
 *.pyc
 .vscode
+CMakeCache.txt
