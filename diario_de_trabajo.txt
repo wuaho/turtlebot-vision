@@ -393,3 +393,11 @@ cuando es en png con level a 9 : ancho de banda consumido por las imagenes = 0.4
 cuando es en png con level a 1 : AVERAGE BANDWIDTH CONSUMPTION: 1.42216126601 MB/s
                                 MEAN LATENCY ACHIEVED: 0.0321973094169 s
                                 tamaño de imagen medio = 0.103034324333316 MB
+
+
+Crear mi propio nodo, hacer tambien que el robot se mueva solo.
+
+11 de mayo
+
+Para suscribirse a imagenes
+http://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython
