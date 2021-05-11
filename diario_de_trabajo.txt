@@ -395,9 +395,22 @@ cuando es en png con level a 1 : AVERAGE BANDWIDTH CONSUMPTION: 1.42216126601 MB
                                 tamaño de imagen medio = 0.103034324333316 MB
 
 
+cuando reducimos resolucion a la mitad: AVERAGE BANDWIDTH CONSUMPTION: 0.859182875018 MB/s
+                                MEAN LATENCY ACHIEVED: 2688.27101266 s  ARREGLAR QUEUE
+                                tamaño de imagen medio = 0.22250791139240506 MB
+
+
+
 Crear mi propio nodo, hacer tambien que el robot se mueva solo.
 
 11 de mayo
 
 Para suscribirse a imagenes
 http://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython
+
+
+Bastante util:
+https://stackoverflow.com/questions/12988151/python-cv2-change-dimension-and-quality
+
+He implementado un filtro que reduce el tamaño de la imagen a la mitad. Arreglar la cola, los tiempos son muy altos.
+Desplegar lo de seguir la linea.
