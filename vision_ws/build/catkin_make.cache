@@ -1,2 +1,0 @@
-turtlebot_depth_computing
--DCATKIN_DEVEL_PREFIX=/home/servidor/turtlebot-vision/vision_ws/devel -DCMAKE_INSTALL_PREFIX=/home/servidor/turtlebot-vision/vision_ws/install -G Unix Makefiles
