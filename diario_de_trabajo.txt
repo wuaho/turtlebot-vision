@@ -417,3 +417,5 @@ Desplegar lo de seguir la linea.
 
 
 12 de mayo
+
+Creo que la cola esta arreglada pero no se por que se pierde el timestamp guardado de la imagen.
