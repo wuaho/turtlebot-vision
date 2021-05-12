@@ -16,19 +16,21 @@ class image_converter:
         self.image_sub = rospy.Subscriber('camera/rgb/image_raw/',Image,self.callback)
     
     def callback(self,data):
-        print(data.header.stamp)
+        
         try:
             cv_image = self.bridge.imgmsg_to_cv2(data,desired_encoding='passthrough')
         except CvBridgeError as e:
             print(e)
 
+        #We make the size a 1/4 of the original one
         cv_modified = cv2.resize(cv_image, (0,0), fx = 0.5, fy = 0.5)
-        # (rows,cols,channels) = cv_image.shape
-        # if(cols > 60 and rows > 60) :
-        #     cv2.circle(cv_image, (50,50), 10, 255)
         
         try:
-            self.image_pub.publish(self.bridge.cv2_to_imgmsg(cv_modified,"bgr8"))
+            ros_image = self.bridge.cv2_to_imgmsg(cv_modified,"bgr8")
+            #The stamp inside the header is not saved after converting the image so we assign the same one that 
+            #original message had
+            ros_image.header.stamp = data.header.stamp
+            self.image_pub.publish(ros_image)
         except CvBridgeError as e:
             print(e)
 

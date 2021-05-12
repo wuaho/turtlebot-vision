@@ -21,8 +21,8 @@ class Camera_Frames_Analysis:
     def image_callback(self, msg):
         #The first thing we do is to tell ros_timer to set the timestamp for the receipt time
         ros_timer.set_receiptStamp()
-
-        print(msg.header)
+        print(msg.header.stamp)
+        
         try:
             #Making use of bridge, we transform the msg to something that OpenCV can handle
             cv2_img = CvBridge().imgmsg_to_cv2(msg,desired_encoding='passthrough')
@@ -52,7 +52,7 @@ class Camera_Frames_Analysis:
         ros_timer.add_frame_to_data()
         
         #Uncomment this line if you want to print the average size of the images taken
-        ros_timer.print_average_bytes_per_image()
+        #ros_timer.print_average_bytes_per_image()
     
 
 
