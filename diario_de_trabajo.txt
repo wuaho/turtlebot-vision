@@ -414,3 +414,6 @@ https://stackoverflow.com/questions/12988151/python-cv2-change-dimension-and-qua
 
 He implementado un filtro que reduce el tamaño de la imagen a la mitad. Arreglar la cola, los tiempos son muy altos.
 Desplegar lo de seguir la linea.
+
+
+12 de mayo
