@@ -22,7 +22,6 @@ class Camera_Frames_Analysis:
         #The first thing we do is to tell ros_timer to set the timestamp for the receipt time
         ros_timer.set_receiptStamp()
 
-        print(msg.header)
         try:
             #Making use of bridge, we transform the msg to something that OpenCV can handle
             cv2_img = CvBridge().imgmsg_to_cv2(msg,desired_encoding='passthrough')

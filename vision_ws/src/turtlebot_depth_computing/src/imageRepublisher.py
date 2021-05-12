@@ -16,6 +16,7 @@ class image_converter:
         self.image_sub = rospy.Subscriber('camera/rgb/image_raw/',Image,self.callback)
     
     def callback(self,data):
+        print(data.header.stamp)
         try:
             cv_image = self.bridge.imgmsg_to_cv2(data,desired_encoding='passthrough')
         except CvBridgeError as e:
