@@ -395,8 +395,8 @@ cuando es en png con level a 1 : AVERAGE BANDWIDTH CONSUMPTION: 1.42216126601 MB
                                 tamaño de imagen medio = 0.103034324333316 MB
 
 
-cuando reducimos resolucion a la mitad: AVERAGE BANDWIDTH CONSUMPTION: 0.859182875018 MB/s
-                                MEAN LATENCY ACHIEVED: 2688.27101266 s  ARREGLAR QUEUE
+cuando reducimos resolucion a la mitad (1/4 del tamaño original): AVERAGE BANDWIDTH CONSUMPTION:  5.31856548471 MB/s
+                                MEAN LATENCY ACHIEVED: 0.0459545004946 s
                                 tamaño de imagen medio = 0.22250791139240506 MB
 
 
@@ -419,3 +419,7 @@ Desplegar lo de seguir la linea.
 12 de mayo
 
 Creo que la cola esta arreglada pero no se por que se pierde el timestamp guardado de la imagen.
+
+Guardo el timestamp antiguo en el nuevo para que funcione.Fixed
+
+Me pongo con lo de crear un mundo donde este la linea dibujada

@@ -21,7 +21,7 @@ class Camera_Frames_Analysis:
     def image_callback(self, msg):
         #The first thing we do is to tell ros_timer to set the timestamp for the receipt time
         ros_timer.set_receiptStamp()
-        print(msg.header.stamp)
+        
         
         try:
             #Making use of bridge, we transform the msg to something that OpenCV can handle
