@@ -427,4 +427,14 @@ Me pongo con lo de crear un mundo donde este la linea dibujada
 Buen tutorial rico: https://learn.turtlebot.com/2015/02/03/6/
 roslaunch turtlebot_gazebo turtlebot_world.launch world_file:=<full path to the world file>
 
-Quizas deberia de probar a hacer el mundo desde el servidor para evitar problemas
+Quizas deberia de probar a hacer el mundo desde el servidor para evitar problemas.
+
+Lo de crear una linea amarilla no funciona, ya sea con un mundo copiadod e internet o creandola yo mismo, 
+hay problemas o en la camara o que en el robot o en la aplicacion no deja libertad para configurar las lineas
+
+13 de mayo
+
+Seguramente sea un genio este tio:
+https://answers.gazebosim.org//question/4761/how-to-build-a-world-with-real-image-as-ground-plane/
+
+Hacer la linea mas pequeña o el tamaño de la imagen menor tambien
