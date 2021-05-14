@@ -438,3 +438,7 @@ Seguramente sea un genio este tio:
 https://answers.gazebosim.org//question/4761/how-to-build-a-world-with-real-image-as-ground-plane/
 
 Añadir el mundo al directorio de trabajo para que este disponible para cualquiera
+
+14 de mayo
+
+Probar a que la cola del publisher sea 1 en vez de  0
