@@ -437,4 +437,4 @@ hay problemas o en la camara o que en el robot o en la aplicacion no deja libert
 Seguramente sea un genio este tio:
 https://answers.gazebosim.org//question/4761/how-to-build-a-world-with-real-image-as-ground-plane/
 
-Hacer la linea mas pequeña o el tamaño de la imagen menor tambien
+Añadir el mundo al directorio de trabajo para que este disponible para cualquiera
