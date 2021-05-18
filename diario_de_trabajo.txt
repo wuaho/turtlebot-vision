@@ -445,3 +445,5 @@ Probar a que la cola del publisher sea 1 en vez de  0
 
 18 de mayo
 
+- Realizar una buena muestra de stats mediante tablita
+- Probar lo que me dijo el profa

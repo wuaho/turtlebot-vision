@@ -24,5 +24,5 @@ echo export ROS_HOSTNAME=HOSTNAME_DE_ESTA_MAQUINA >> ~/.bashrc
 echo export DISPLAY=:0 
 
 #Para tener el nodo de ros que hemos creado accesible en todo momento:
-echo source /home/HOSTNAME/turtlebot-vision/vision_ws/devel/setup.bash
+echo source $HOME/turtlebot-vision/vision_ws/devel/setup.bash
 

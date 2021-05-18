@@ -28,3 +28,7 @@ Desarrollo del paquete:
     -Ahora CMAkeLists.txt tiene un findPAckage(OpenCV)
     -Añadidas las dependencias en package.xml con opencv y cv_bridge
     -Recordar hacer un chmod +x filename para que se pueda ejecutar dicho script
+
+Comandos a utilizar:
+    -Para poner en marcha el follower << roslaunch turtlebot_gazebo turtlebot_world.launch $HOME/turtlebot-vision/worlds/yellow.world >>
+    -Para utilizar frameAnalyzerCompressed hay que antes ejecutar imageRepublisher 
