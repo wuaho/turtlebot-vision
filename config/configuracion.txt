@@ -23,6 +23,9 @@ Instalacion del entorno:
     el comando << export DISPLAY=:0  >>
     -Quitadas las carpetas build y devel del repositorio git para que asi no haya problemas al clonar repositorios en otra 
     maquina. Eso si, ahora tendremos que hacer un catkin_make tras clonar
+    -Para poder utilizar el mundo con el la linea amarilla, estas se han añadido al repo, tambien hay que añadir la imagen
+     a los models de la carpeta .gazebo del home.
+    -Para ello debemos de hacer cp -R $HOME/turtlebot-vision/worlds/models/my_ground_plane $HOME/.gazebo/models/
 
 Desarrollo del paquete:
     -Ahora CMAkeLists.txt tiene un findPAckage(OpenCV)
@@ -30,5 +33,6 @@ Desarrollo del paquete:
     -Recordar hacer un chmod +x filename para que se pueda ejecutar dicho script
 
 Comandos a utilizar:
-    -Para poner en marcha el follower << roslaunch turtlebot_gazebo turtlebot_world.launch $HOME/turtlebot-vision/worlds/yellow.world >>
+    -Para poner en marcha el follower << roslaunch turtlebot_gazebo turtlebot_world.launch world_file:=$HOME/turtlebot-vision/worlds/yellow.world >>
     -Para utilizar frameAnalyzerCompressed hay que antes ejecutar imageRepublisher 
+    -Para ver lo que ve el robot: <<rosrun image_view image_view image:=/camera/rgb/image_raw>>
