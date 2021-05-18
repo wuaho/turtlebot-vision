@@ -442,3 +442,6 @@ Añadir el mundo al directorio de trabajo para que este disponible para cualquie
 14 de mayo
 
 Probar a que la cola del publisher sea 1 en vez de  0
+
+18 de mayo
+
