@@ -183,7 +183,7 @@ class ROS_Timer:
         ###DATA STRUCTURE: LIST OF TUPLES. Each tuple: (frameSeqNumber,cameraStamp,receiptStamp,postProcessingStamp,
         # lostPackets, network delay,processing delay,total delay)
 
-        with open('data_collected.csv','w') as csvfile:
+        with open('stats/data_collected.csv','w') as csvfile:
             csvfile.write("frameSeqNumber,cameraStamp,receiptStamp,postProcessingStamp,lostPackets,network delay,processing delay,total delay")
             for stamp in self.storedData:
                 line = ",".join(map(str,stamp))
@@ -193,7 +193,7 @@ class ROS_Timer:
     def write_usefulInfo(self):
         """Writes a file in the same directory named 'useful_info.txt' that contains some performance 
         information about the simulation"""
-        with open('useful_info.txt','w') as txtfile:
+        with open('stats/useful_info.txt','w') as txtfile:
             txtfile.write("TOTAL TIME SPENT ON SIMULATION: "+str(self.get_runtime())+" s\n")
             txtfile.write("TOTAL NUMBER OF IMAGES RECEIVED: "+str(self.get_totalReceivedImages())+" images\n")
             txtfile.write("TOTAL NUMBER OF IMAGES LOST: "+str(self.get_totalLostImages())+" images\n")
