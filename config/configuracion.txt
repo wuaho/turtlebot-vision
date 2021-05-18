@@ -36,3 +36,6 @@ Comandos a utilizar:
     -Para poner en marcha el follower << roslaunch turtlebot_gazebo turtlebot_world.launch world_file:=$HOME/turtlebot-vision/worlds/yellow.world >>
     -Para utilizar frameAnalyzerCompressed hay que antes ejecutar imageRepublisher 
     -Para ver lo que ve el robot: <<rosrun image_view image_view image:=/camera/rgb/image_raw>>
+    -Para cambiar facilmente los parametros de publicacion <<rosrun rqt_reconfigure rqt_reconfigure>> 
+    -Para cambiar la frecuencia de publicacion de imagenes en la simulacion, hay que ir al archivo: 
+/opt/ros/kinect/share/turtlebot_description/urdf/turtlebot_gazebo.urdf.xacro

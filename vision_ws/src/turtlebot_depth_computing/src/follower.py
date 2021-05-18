@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 import rospy,cv2,csv
-from sensor_msgs.msg import Image
+from sensor_msgs.msg import Image,CompressedImage
 from cv_bridge import CvBridge
 from geometry_msgs.msg import Twist
 import numpy as np
@@ -11,12 +11,23 @@ import numpy as np
 class Follower:
     
     def __init__(self):
-        self.image_sub = rospy.Subscriber('camera/rgb/image_raw/', Image, self.image_callback)
+        #Raw image version
+        #self.image_sub = rospy.Subscriber('camera/rgb/image_raw/', Image, self.image_callback)
+
+        #Compressed image version
+        self.image_sub = rospy.Subscriber('camera/rgb/image_raw/compressed', CompressedImage, self.image_callback)
+        #Half res version
+        #self.image_sub = rospy.Subscriber('image_half_res', Image, self.image_callback)
+
         self.cmd_vel_pub = rospy.Publisher('cmd_vel_mux/input/teleop',Twist, queue_size=0)
         self.twist = Twist()
     def image_callback(self, msg):
         #Making use of bridge, we transform the msg to something that OpenCV can handle
-        image = CvBridge().imgmsg_to_cv2(msg,desired_encoding='passthrough')
+        #image = CvBridge().imgmsg_to_cv2(msg,desired_encoding='passthrough')
+
+        #For compressed images we would use this one:
+        image = CvBridge().compressed_imgmsg_to_cv2(msg,desired_encoding='passthrough')
+        
 
         #Vision processing code that we want to execute
         #RGB to HSV and green filter 
@@ -41,7 +52,7 @@ class Follower:
             #Movement of the robot, first line calculates the error between the center column of the image and the center
             #of the line
             err = cx - w/2
-            self.twist.linear.x = 0.4
+            self.twist.linear.x = 0.2
             self.twist.angular.z = -float(err) / 100
             self.cmd_vel_pub.publish(self.twist) 
 
