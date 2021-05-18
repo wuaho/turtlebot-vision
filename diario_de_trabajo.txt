@@ -447,3 +447,6 @@ Probar a que la cola del publisher sea 1 en vez de  0
 
 - Realizar una buena muestra de stats mediante tablita
 - Probar lo que me dijo el profa
+
+
+No entiendo por que el robot no publica al rate que se le indica
