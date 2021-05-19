@@ -331,7 +331,7 @@ Mirar % de compresion en topic compressed - si es alto, hacer un topic custom co
 
 
 Mirar los recursos consumidos por el portatil, bajar los FPS a lso que publica DONE
-    Por defecto, arriba 20 abajo 10, por defecto publica a unos 24-25 fps
+    Por defecto, arriba 20.0 abajo 10, por defecto publica a unos 24-25 fps
     Si pongo el update rate a 0.0 de abajo para que suba imagenes en cuanto pueda, y obtengo un hz de 26-27 fps. Esto se debe
     seguramente a uin bottleneck de la gpu que no de para mas.
     Si pongo el update rate de ambos a 0 se publica a unos 100hz pero luego se pierden paquetes

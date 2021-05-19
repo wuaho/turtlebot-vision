@@ -23,7 +23,7 @@ class Camera_Frames_Analysis:
         #The first thing we do is to tell ros_timer to set the timestamp for the receipt time
         ros_timer.set_receiptStamp()
 
-        print(msg.format)
+        
         
         try:
             #Making use of bridge, we transform the msg to something that OpenCV can handle
@@ -53,9 +53,9 @@ class Camera_Frames_Analysis:
         ros_timer.add_frame_to_data()
 
         #Uncomment this line if you want to print the average size of the images taken
-        #ros_timer.print_average_bytes_per_image()
+        ros_timer.print_average_bytes_per_image()
     
-
+    
 
 def bgr_to_hsv(imagen):
     # Convert BGR to HSV
@@ -78,7 +78,10 @@ def main():
     Analyzer=Camera_Frames_Analysis()
     
     #Rospy.spin will detect when the node is stopped 
-    rospy.spin()
+    #rospy.spin()
+
+    #If you want it to stop after a duration of time use this line instead
+    rospy.sleep(300)
 
     #Stop of the timer
     ros_timer.stop()

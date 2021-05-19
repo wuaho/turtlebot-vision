@@ -51,7 +51,7 @@ class Camera_Frames_Analysis:
         ros_timer.add_frame_to_data()
         
         #Uncomment this line if you want to print the average size of the images taken
-        #ros_timer.print_average_bytes_per_image()
+        ros_timer.print_average_bytes_per_image()
     
 
 
@@ -76,7 +76,10 @@ def main():
     Analyzer=Camera_Frames_Analysis()
     
     #Rospy.spin will detect when the node is stopped 
-    rospy.spin()
+    #rospy.spin()
+
+    #If you want it to stop after a duration of time use this line instead
+    rospy.sleep(300)
 
     #Stop of the timer
     ros_timer.stop()
