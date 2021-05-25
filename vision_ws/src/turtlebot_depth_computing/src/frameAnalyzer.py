@@ -76,10 +76,10 @@ def main():
     Analyzer=Camera_Frames_Analysis()
     
     #Rospy.spin will detect when the node is stopped 
-    #rospy.spin()
+    rospy.spin()
 
     #If you want it to stop after a duration of time use this line instead
-    rospy.sleep(300)
+    #rospy.sleep(300)
 
     #Stop of the timer
     ros_timer.stop()

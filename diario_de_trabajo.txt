@@ -450,3 +450,33 @@ Probar a que la cola del publisher sea 1 en vez de  0
 
 
 No entiendo por que el robot no publica al rate que se le indica
+
+
+25 de mayo
+
+Tareas a implementar en simulacion: 
+-poner muros y objetos con sprays para que las imagenes del robot comprimidas no tengan un tamaño del 1% 
+de la imagen original
+-monitorizacion de la red + perdida de imagenes: REALIZADO
+    todo esta en la carpeta de drive llamada "wireshark"
+
+    Lo que esta pasando es, basicamente dice en este link https://seguridadyredes.wordpress.com/2009/02/19/tshark-detectando-problemas-en-la-red/
+    Que no le ha llegado confirmacion al portatil de la recepcion de un paquete. Como respuesta, el servidor
+    empezara a enviar TCP Dup ACK hasta que le envien el paquete que ser perdió.
+    Mientras tanto, el portatil seguira enviando paquetes pero no seran bien recibidos por el servidor.
+    Cuando finalmente el portatil realiza un TCP Fast Retransmission, pero antes envia un paquete con etiqueta PSH 
+    para indicarle al servidor (por qué paquete van NI IDEA EN REALIDAD) y así pushearlo a la pila.
+    El servidor desponderá con un ACK al paquete pusheado en la pila e inmediatamente despues recibirá el paquete enviado 
+    con Fast Retransmission dejando tras ello de enviar TCP Dup.
+    Ahora bien, el servidor responderá a los siguientes paquetes en la pila pero el portatil igualmente responderá
+    a dichos paquetes mediante TCP Out-Of-Order al no tratarse del ultimo paquete de datos enviado.
+    Cuando en la pila del servidor se llegue al ultimo paquete de datos enviado por el portatil, seguirá la transmisión 
+    con normalidad.
+
+
+-negocio entre robot y servidor 
+
+Tareas a implementar en el robot real:
+-compatibilidad entre diferentes SO
+-IP asignada por portatil/router
+-Comparar resultados
