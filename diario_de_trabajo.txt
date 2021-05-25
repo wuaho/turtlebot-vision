@@ -460,6 +460,10 @@ de la imagen original
 -monitorizacion de la red + perdida de imagenes: REALIZADO
     todo esta en la carpeta de drive llamada "wireshark"
 
+    Podemos comentar que hemos llegado a la conclusion de mirar la red por alguna captura de un programa de recursos y ver
+    como la red se satura. O simplemente calcular el tamaño de la imagen, 0.8828 MB aprox x 30 FPS aprox de publicacion 
+    =  26.484
+
     Lo que esta pasando es, basicamente dice en este link https://seguridadyredes.wordpress.com/2009/02/19/tshark-detectando-problemas-en-la-red/
     Que no le ha llegado confirmacion al portatil de la recepcion de un paquete. Como respuesta, el servidor
     empezara a enviar TCP Dup ACK hasta que le envien el paquete que ser perdió.
@@ -475,6 +479,8 @@ de la imagen original
 
 
 -negocio entre robot y servidor 
+
+-cambiar en la clase ros timer, que el ancho de banda consumido sea en vez de MB/s , Mb/s
 
 Tareas a implementar en el robot real:
 -compatibilidad entre diferentes SO
