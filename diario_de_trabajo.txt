@@ -486,3 +486,11 @@ Tareas a implementar en el robot real:
 -compatibilidad entre diferentes SO
 -IP asignada por portatil/router
 -Comparar resultados
+
+
+26 de mayo
+
+Correcion, ahora useful data muestra en el ancho de banda consumido Mb/s y no MB/s 
+
+Nuevo mundo creado donde contiene muros para que la imagen no sea entera blanca. Aun asi los resultados muestran 
+que jpeg consigue una compresion del 2.5% aprox. Es decir, una compresion no realista, digno de un mundo simulado.

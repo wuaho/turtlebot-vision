@@ -24,8 +24,9 @@ Instalacion del entorno:
     -Quitadas las carpetas build y devel del repositorio git para que asi no haya problemas al clonar repositorios en otra 
     maquina. Eso si, ahora tendremos que hacer un catkin_make tras clonar
     -Para poder utilizar el mundo con el la linea amarilla, estas se han añadido al repo, tambien hay que añadir la imagen
-     a los models de la carpeta .gazebo del home.
+     a los models de la carpeta .gazebo del home. Tambien hacerlo con el mundo que tiene muros
     -Para ello debemos de hacer cp -R $HOME/turtlebot-vision/worlds/models/my_ground_plane $HOME/.gazebo/models/
+    cp -R $HOME/turtlebot-vision/worlds/models/my_green_walls $HOME/.gazebo/models/
 
 Desarrollo del paquete:
     -Ahora CMAkeLists.txt tiene un findPAckage(OpenCV)

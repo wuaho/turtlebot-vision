@@ -52,7 +52,7 @@ class Follower:
             #Movement of the robot, first line calculates the error between the center column of the image and the center
             #of the line
             err = cx - w/2
-            self.twist.linear.x = 0.2
+            self.twist.linear.x = 0.6
             self.twist.angular.z = -float(err) / 100
             self.cmd_vel_pub.publish(self.twist) 
 

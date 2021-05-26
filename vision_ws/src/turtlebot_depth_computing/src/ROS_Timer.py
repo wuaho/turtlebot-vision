@@ -140,11 +140,11 @@ class ROS_Timer:
         return jitter
     
     def calculate_bw(self):
-        """Returns the average bandwidth consumption in MB/s"""
+        """Returns the average bandwidth consumption in Mb/s"""
         sum_of_bytes = self.sumImageSize
         average_bytes_per_image = sum_of_bytes / self.get_totalReceivedImages()
         FPS = self.calculate_fps()
-        bw = ((average_bytes_per_image / 1024) / 1024) * FPS  
+        bw = (((average_bytes_per_image / 1024) / 1024) * FPS)  * 8
         return bw
     
     def print_average_bytes_per_image(self):
@@ -203,7 +203,7 @@ class ROS_Timer:
             txtfile.write("MIN LATENCY ACHIEVED: "+ str(self.get_minTime())+" s\n")
             txtfile.write("AVERAGE JITTER: "+ str(self.calculate_jitter())+" s\n")
             txtfile.write("APROX FREQUENCY: "+ str(self.calculate_fps())+" FPS\n")
-            txtfile.write("AVERAGE BANDWIDTH CONSUMPTION: " + str(self.calculate_bw()) +" MB/s")
+            txtfile.write("AVERAGE BANDWIDTH CONSUMPTION: " + str(self.calculate_bw()) +" Mb/s")
 
 
 
