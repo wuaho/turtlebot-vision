@@ -5,3 +5,4 @@ useful_info.txt
 vision_ws/build/
 vision_ws/devel/
 stats/*
+!stats/.gitkeep
