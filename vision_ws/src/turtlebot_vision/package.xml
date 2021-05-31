@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>turtlebot_depth_computing</name>
+  <name>turtlebot_vision</name>
   <version>0.0.1</version>
-  <description>El paquete turtlebot_depth_computing visualiza lo que ve un turtlebot mediante camaras de profundidad.</description>
+  <description>El paquete turtlebot_vision  visualiza y analiza lo que ve un turtlebot mediante la kinect de la que dispone.</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
