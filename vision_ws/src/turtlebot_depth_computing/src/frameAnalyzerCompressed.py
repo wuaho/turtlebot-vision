@@ -28,7 +28,7 @@ class Camera_Frames_Analysis:
         try:
             #Making use of bridge, we transform the msg to something that OpenCV can handle
             cv2_img = CvBridge().compressed_imgmsg_to_cv2(msg,desired_encoding='passthrough')
-        except CvBridgeError, e:
+        except CvBridgeError as e:
             #Code executed when an error is encountered
             print(e)
 
