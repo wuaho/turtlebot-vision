@@ -17,7 +17,7 @@ class Camera_Frames_Analysis:
     def __init__(self):
         #Start of the timer
         ros_timer.start()
-        self.image_sub = rospy.Subscriber('camera/rgb/image_color/compressed', CompressedImage, self.image_callback)
+        self.image_sub = rospy.Subscriber('camera/rgb/image_raw/compressed', CompressedImage, self.image_callback)
 
     def image_callback(self, msg):
         #The first thing we do is to tell ros_timer to set the timestamp for the receipt time
