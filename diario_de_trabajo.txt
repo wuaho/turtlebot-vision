@@ -518,3 +518,8 @@ al printear el encoding de la imagen me aparece bayer_grbg8
 
  ES QUE AL NODO QUE HAY QUE SUSCRIBIRSE ES /camera/rgb/image_color
 
+ sudo ntpdate -dv hora.roa.es
+
+sudo apt-get install ntp
+
+LA IDEA ES QUE EL PORTATIL TENGA NTP Y EN EL ROBOT TENGAMOS CHRONY Y QUE SE CONECTE AL PORTATIL
