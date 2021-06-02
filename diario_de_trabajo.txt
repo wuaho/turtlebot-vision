@@ -494,3 +494,27 @@ Correcion, ahora useful data muestra en el ancho de banda consumido Mb/s y no MB
 
 Nuevo mundo creado donde contiene muros para que la imagen no sea entera blanca. Aun asi los resultados muestran 
 que jpeg consigue una compresion del 2.5% aprox. Es decir, una compresion no realista, digno de un mundo simulado.
+
+2 de junio
+
+Tutorial para hacer uso del robot
+
+1. Asignar Ips correctas al turtlebot y a el portatil haciendo el portatil el punto de acceso
+
+2. En el .bashrc corregir las ips de ros master ros ip y tal ademas de, nuevamente, seleccionar el sensor kinect en la variable
+
+3. Comandos mediante SSH desde el portatil
+
+4. Para poner en marcha las funciones basicas del turtlebot
+roslaunch turtlebot_bringup minimal.launch
+
+5. Para poner en marcha el sensor y la vision 3D de este
+roslaunch turtlebot_bringup 3dsensor.launch
+
+error: /tmp/binarydeb/ros-kinetic-opencv3-3.3.1/modules/imgproc/src/color.cpp:11178: error: (-215) (scn == 3 || scn == 4) && (depth == 0 || depth == 5) in function cvtColor
+
+
+al printear el encoding de la imagen me aparece bayer_grbg8
+
+ ES QUE AL NODO QUE HAY QUE SUSCRIBIRSE ES /camera/rgb/image_color
+
