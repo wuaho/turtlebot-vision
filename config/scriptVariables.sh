@@ -13,10 +13,10 @@ echo export TURTLEBOT_3D_SENSOR=kinect >> ~/.bashrc
 echo export ROS_MASTER_URI=http://localhost:11311 >> ~/.bashrc
 
 #Por defecto, esta variable de entorno no existe
-#EN EL SERVIDOR: introducir el hostname del servidor
-#EN EL ROBOT: introducir el hostname del robot
+#EN EL SERVIDOR: introducir la ip del servidor
+#EN EL ROBOT: introducir la ip del robot
 
-echo export ROS_HOSTNAME=HOSTNAME_DE_ESTA_MAQUINA >> ~/.bashrc
+echo export ROS_HOSTNAME=IP_DE_ESTA_MAQUINA >> ~/.bashrc
 
 
 #Para poder hacer un roslaunch desde el servidor en el cliente mediante ssh tenemos que añadir en el .bashrc del cliente
