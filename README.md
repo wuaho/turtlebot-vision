@@ -1,2 +1,2 @@
 # turtlebot-vision
-Implementation of nodes for the ROS turtlebot that make use of the Microsoft Kinect to create a point cloud and leave the compute of vision to a server.
+Implementation of nodes for the ROS turtlebot that make use of the images taken by the Microsoft Kinect to evaluate the communication efficiency between the local server and the turtlebot.
