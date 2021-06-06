@@ -7,9 +7,6 @@ from datetime import datetime
 
 
 class ROS_Timer:    
-    ###ATRIBUTOS DE LA CLASE QUE VAN A SER IGUALES EN CUALQUIER OBJETO CREADO DE DICHA CLASE
-    #UN underscore es simplemente convencion para decir que algo es privado, un doble underscore hace  que te lo tengas que currar 
-    #para acceder al valor
 
     def __init__(self):
         self.startTime = None
