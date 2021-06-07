@@ -101,13 +101,15 @@ class ROS_Timer:
         return pctg
         
     def get_minTime(self):
-        return self.minTime
+        mintime = (self.minTime * 1000)
+        return mintime
     def get_meanTime(self):
-        mean = self.totalNetworkDelay / self.get_totalReceivedImages()
+        mean = ((self.totalNetworkDelay / self.get_totalReceivedImages()) * 1000)
         return mean
 
     def get_maxTime(self):
-        return self.maxTime
+        maxtime  = (self.maxTime * 1000)
+        return maxtime
     def get_runtime(self):
         """Returns the number of seconds since the timer was started to when it was stopped
         """
@@ -133,7 +135,7 @@ class ROS_Timer:
             diff += abs(self.storedData[i][5] - self.storedData[i+1][5])
 
         jitter = diff / ( len(self.storedData) -1)
-
+        jitter = (jitter * 1000)
         return jitter
     
     def calculate_bw(self):
@@ -195,10 +197,10 @@ class ROS_Timer:
             txtfile.write("TOTAL NUMBER OF IMAGES RECEIVED: "+str(self.get_totalReceivedImages())+" images\n")
             txtfile.write("TOTAL NUMBER OF IMAGES LOST: "+str(self.get_totalLostImages())+" images\n")
             txtfile.write("% OF IMAGES LOST: "+str(self.get_percentageOfLostImages())+" %\n")
-            txtfile.write("MEAN LATENCY ACHIEVED: "+ str(self.get_meanTime())+" s\n")
-            txtfile.write("MAX LATENCY ACHIEVED: "+ str(self.get_maxTime())+" s\n")
-            txtfile.write("MIN LATENCY ACHIEVED: "+ str(self.get_minTime())+" s\n")
-            txtfile.write("AVERAGE JITTER: "+ str(self.calculate_jitter())+" s\n")
+            txtfile.write("MEAN LATENCY ACHIEVED: "+ str(self.get_meanTime())+" ms\n")
+            txtfile.write("MAX LATENCY ACHIEVED: "+ str(self.get_maxTime())+" ms\n")
+            txtfile.write("MIN LATENCY ACHIEVED: "+ str(self.get_minTime())+" ms\n")
+            txtfile.write("AVERAGE JITTER: "+ str(self.calculate_jitter())+" ms\n")
             txtfile.write("APROX FREQUENCY: "+ str(self.calculate_fps())+" FPS\n")
             txtfile.write("AVERAGE BANDWIDTH CONSUMPTION: " + str(self.calculate_bw()) +" Mb/s")
 
