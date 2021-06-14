@@ -523,3 +523,5 @@ al printear el encoding de la imagen me aparece bayer_grbg8
 sudo apt-get install ntp
 
 LA IDEA ES QUE EL PORTATIL TENGA NTP Y EN EL ROBOT TENGAMOS CHRONY Y QUE SE CONECTE AL PORTATIL
+
+ntpdate -q para saber el offset del clock de dos ordenadores

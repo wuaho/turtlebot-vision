@@ -17,7 +17,7 @@ class Camera_Frames_Analysis:
     def __init__(self):
         #Start of the timer
         ros_timer.start()
-        self.image_sub = rospy.Subscriber('camera/rgb/image_raw/compressed', CompressedImage, self.image_callback)
+        self.image_sub = rospy.Subscriber('camera/rgb/image_color/compressed', CompressedImage, self.image_callback)
 
     def image_callback(self, msg):
         #The first thing we do is to tell ros_timer to set the timestamp for the receipt time
@@ -78,10 +78,10 @@ def main():
     Analyzer=Camera_Frames_Analysis()
     
     #Rospy.spin will detect when the node is stopped 
-    rospy.spin()
+    #rospy.spin()
 
     #If you want it to stop after a duration of time use this line instead
-    #rospy.sleep(300)
+    rospy.sleep(300)
 
     #Stop of the timer
     ros_timer.stop()
