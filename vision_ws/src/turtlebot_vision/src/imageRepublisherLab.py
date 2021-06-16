@@ -29,7 +29,9 @@ class image_converter:
             ros_image = self.bridge.cv2_to_imgmsg(cv_modified,"bgr8")
             #The stamp inside the header is not saved after converting the image so we assign the same one that 
             #original message had
+            
             ros_image.header.stamp = data.header.stamp
+            print("Envio imagen",data.header.seq)
             self.image_pub.publish(ros_image)
         except CvBridgeError as e:
             print(e)
