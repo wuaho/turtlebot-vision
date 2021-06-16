@@ -17,7 +17,7 @@ class Follower:
         #Compressed image version
         self.image_sub = rospy.Subscriber('camera/rgb/image_color/compressed', CompressedImage, self.image_callback)
         #Half res version
-        #self.image_sub = rospy.Subscriber('image_half_res', Image, self.image_callback)
+        #self.image_sub = rospy.Subscriber('image_half_res', Image, self.image_callback, queue_size=1)
 
         self.cmd_vel_pub = rospy.Publisher('cmd_vel_mux/input/teleop',Twist, queue_size=0)
         self.twist = Twist()
@@ -37,12 +37,16 @@ class Follower:
         #Since we dont need the whole line on the picture for the robot, we will slice everything that is not in the 
         #20-row portion of the image. Doing this, we get the part that is one-meter distance from the robot.
         h, w, d = image.shape
-        search_top = 3*h/4
+        search_top = 6*h/7
         search_bot = search_top + 20
+        
+        search_left = w/3
+        search_right = search_left + w/3
 
         yellow_mask[0:search_top, 0:w] = 0
         yellow_mask[search_bot:h, 0:w] = 0
-
+        yellow_mask[0:h, 0:search_left] = 0
+        yellow_mask[0:h, search_right:w] = 0
         #Here we calculate the centroid or center of mass of the remaining masked picture
         M = cv2.moments(yellow_mask)
         if( M['m00'] > 0 ):
@@ -52,9 +56,9 @@ class Follower:
             #Movement of the robot, first line calculates the error between the center column of the image and the center
             #of the line
             err = cx - w/2
-            self.twist.linear.x = 0.08
+            self.twist.linear.x = 0.4
             self.twist.angular.z = -float(err) / 100
-            self.cmd_vel_pub.publish(self.twist) 
+            #self.cmd_vel_pub.publish(self.twist) 
 
 
         cv2.imshow('filter',yellow_mask)
