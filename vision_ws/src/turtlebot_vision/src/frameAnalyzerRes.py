@@ -16,7 +16,7 @@ class Camera_Frames_Analysis:
     def __init__(self):
         #Start of the timer
         ros_timer.start()
-        self.image_sub = rospy.Subscriber('/image_half_res', Image, self.image_callback, queue_size=30)
+        self.image_sub = rospy.Subscriber('/image_half_res', Image, self.image_callback, queue_size=1)
 
     def image_callback(self, msg):
         #The first thing we do is to tell ros_timer to set the timestamp for the receipt time
